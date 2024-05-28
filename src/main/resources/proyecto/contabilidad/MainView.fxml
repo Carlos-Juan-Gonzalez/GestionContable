@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Hyperlink?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.contabilidad.MainController">
+    <top>
+        <HBox alignment="CENTER_LEFT" minHeight="35">
+            <Button text="cosas" styleClass="btn,btn-primary" style="-fx-background-color: #5c67fa"/>
+            <Button text="casar" styleClass="btn,btn-primary" style="-fx-background-color: #5c67fa"/>
+            <Button text="paco" styleClass="btn,btn-primary" style="-fx-background-color: #5c67fa"/>
+        </HBox>
+    </top>
+    <center>
+        <TableView></TableView>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-background-color: #5c67fa" minHeight="35" >
+            <Text text="Version 1.0.0  |  Gestor Contable  | ® software por Carlos Juan González  |   " style="-fx-fill: #FFFFFF"></Text>
+            <Hyperlink fx:id="link" onAction="#link"></Hyperlink>
+        </HBox>
+    </bottom>
+</BorderPane>

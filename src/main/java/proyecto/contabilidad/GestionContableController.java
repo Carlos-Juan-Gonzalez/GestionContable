@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -95,6 +96,7 @@ public class GestionContableController{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginView.fxml"));
             Scene scene = new Scene(fxmlLoader.load(),500,350);
+            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
             ((Stage) usuario.getScene().getWindow()).setScene(scene);
             GestionContableController controller = fxmlLoader.getController();
             controller.setGitIcon();
@@ -110,6 +112,7 @@ public class GestionContableController{
         if (validarLogin(conexion)){
             conexion.createNewUser(this.usuario.getText(),password.getText());
             this.connection = conexion.setConnection(this.usuario.getText(),password.getText());
+            cambiarMainView();
         }
     }
 
@@ -137,7 +140,17 @@ public class GestionContableController{
         }
     }
     public void cambiarMainView(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(),1000,800);
+            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+            MainController controller = fxmlLoader.getController();
+            controller.setGitIcon();
+            ((Stage) usuario.getScene().getWindow()).setScene(scene);
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
