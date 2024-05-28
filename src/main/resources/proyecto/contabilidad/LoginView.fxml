@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.PasswordField?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.contabilidad.GestionContableController">
+
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <TextField promptText="Usuario" maxWidth="200" fx:id="usuario"/>
+            <PasswordField promptText="Contraseña" maxWidth="200" fx:id="password"/>
+            <Text fx:id="alert" visible="false"></Text>
+            <Button onAction="#login" styleClass="btn,btn-primary" style="-fx-background-color: #5c67fa">Entrar</Button>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-background-color: #5c67fa" minHeight="35" >
+            <Text text="Version 1.0.0  |  Gestor Contable  | ® software por Carlos Juan González  |   " style="-fx-fill: #FFFFFF"></Text>
+            <Hyperlink fx:id="link" onAction="#link"></Hyperlink>
+        </HBox>
+    </bottom>
+</BorderPane>
