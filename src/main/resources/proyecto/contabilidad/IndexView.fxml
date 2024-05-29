@@ -16,7 +16,7 @@
         <VBox alignment="CENTER" spacing="10">
             <Text style="-fx-fill: #5c67fa">Para continuar con la ejecución del programa</Text>
             <Text style="-fx-fill: #5c67fa">por favor cambie la contraseña del administrador</Text>
-            <TextField text="superAdmin" disable="true" maxWidth="200" fx:id="usuario"/>
+            <TextField text="admin" disable="true" maxWidth="200" fx:id="usuario"/>
             <PasswordField promptText="Nueva Contraseña" maxWidth="200" fx:id="password"/>
             <PasswordField promptText="Repita la Contraseña" maxWidth="200" fx:id="passwordValidation"/>
             <Text fx:id="alert" visible="false"></Text>

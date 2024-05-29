@@ -38,3 +38,11 @@ U
 %.mvn/wrapper/maven-wrapper.properties,3\2\32e074f71d16c1e88ac02aa83592ca6ad1fd98a8
 Å
 Q.idea/sonarlint/securityhotspotstore/1/3/13d4b3048bff05767c733ee865ad9c055c0abafb,a\f\afe9edb325183d38c3883816da8db0208a6d07b5
+l
+<src/main/java/proyecto/contabilidad/AdminMainController.java,3\6\36103074717df87e185bf3ca6353e5162fcf251c
+_
+/src/main/java/proyecto/contabilidad/Diario.java,6\c\6cd11cba5d2618b33354aab55e92a0f16382b7c7
+`
+0src/main/java/proyecto/contabilidad/Asiento.java,f\e\feabf47afdd9400f8d0bb99984a0b6fb48af92ca
+b
+2src/main/java/proyecto/contabilidad/Anotacion.java,5\d\5d49ec4aa7df1f88b15f0ee5db3fffbf9d188c7b

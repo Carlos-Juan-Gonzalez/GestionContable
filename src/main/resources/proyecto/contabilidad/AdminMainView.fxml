@@ -17,7 +17,7 @@
         </HBox>
     </top>
     <center>
-        <TableView fx:id="tabla" style=".table-column{-fx-alignment: CENTER}"></TableView>
+        <TableView></TableView>
     </center>
     <bottom>
         <HBox alignment="CENTER" style="-fx-background-color: #5c67fa" minHeight="35" >

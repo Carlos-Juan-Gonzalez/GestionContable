@@ -100,7 +100,7 @@ public class GestionContableController{
             ((Stage) usuario.getScene().getWindow()).setScene(scene);
             GestionContableController controller = fxmlLoader.getController();
             controller.setGitIcon();
-            controller.usuario.setText("superadmin");
+            controller.usuario.setText("admin");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -110,9 +110,14 @@ public class GestionContableController{
     public void login(){
         Conexion conexion = new Conexion();
         if (validarLogin(conexion)){
+            Usuario usuario = new Usuario();
+            Diario diario = new Diario();
+
             conexion.createNewUser(this.usuario.getText(),password.getText());
             this.connection = conexion.setConnection(this.usuario.getText(),password.getText());
-            cambiarMainView();
+            usuario = usuario.constructUsuario(connection,this.usuario.getText());
+            diario = diario.constructDiario(connection, usuario.getDiario_id());
+            cambiarMainView(usuario,diario);
         }
     }
 
@@ -139,14 +144,16 @@ public class GestionContableController{
             return true;
         }
     }
-    public void cambiarMainView(){
+    public void cambiarMainView(Usuario usuario,Diario diario){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainView.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(),1000,800);
+            Scene scene = new Scene(fxmlLoader.load(),800,600);
             scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
             MainController controller = fxmlLoader.getController();
             controller.setGitIcon();
-            ((Stage) usuario.getScene().getWindow()).setScene(scene);
+            controller.setAtributes(diario,usuario,connection);
+            controller.setDiarioContent();
+            ((Stage) this.usuario.getScene().getWindow()).setScene(scene);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

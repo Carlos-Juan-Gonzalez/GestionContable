@@ -16,9 +16,9 @@ public class Usuario {
     public Usuario() {
 
     }
-    public Usuario(int permiso_id, int id, int diario_id, String nombre, String contraseña) {
-        this.permiso_id = permiso_id;
+    public Usuario(int id,int permiso_id,int diario_id, String nombre, String contraseña) {
         this.id = id;
+        this.permiso_id = permiso_id;
         this.diario_id = diario_id;
         this.nombre = nombre;
         this.contraseña = contraseña;
@@ -48,6 +48,21 @@ public class Usuario {
             System.out.println(e);
         }
         return false;
+    }
+
+    public Usuario constructUsuario(Connection connection,String user){
+        Usuario usuario;
+        try (Statement statement = connection.createStatement()){
+
+            ResultSet rs = statement.executeQuery("select * from usuarios where usuario = '"+user+"'");
+            rs.next();
+
+            usuario = new Usuario(rs.getInt(1),rs.getInt(2),rs.getInt(3),
+                    rs.getString(4),rs.getString(5));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
     }
 
     public int getId() {

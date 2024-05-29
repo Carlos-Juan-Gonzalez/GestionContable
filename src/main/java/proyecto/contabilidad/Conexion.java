@@ -65,7 +65,7 @@ public class Conexion {
 
     /**
      * Ejecuta el sql del archivo 'GestorContable.sql' para crear
-     * las tablas y el contenido base de la base de datos
+     * las tablas e insertar el usuario admin y privilegios
      */
     public void createDB(){
 
@@ -85,10 +85,32 @@ public class Conexion {
         }
     }
 
+    /**
+     * Ejecuta el sql del archivo 'DiarioPruebas.sql' para
+     * insertar el contenido de el diario de pruebas
+     */
+    public void populatePruebaDB(){
+
+        try(Statement statement = conexion.createStatement();) {
+            File file = new File(Conexion.class.getResource("SQL/DiarioPruebas.sql").toURI());
+            FileReader lector = new FileReader(file);
+            BufferedReader lectorBuffereado = new BufferedReader(lector);
+
+            do {
+                statement.executeUpdate(lectorBuffereado.readLine());
+            }while(lectorBuffereado.ready());
+            //cerramos los lectores
+            lectorBuffereado.close();
+            lector.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public boolean isFirstLoging(){
         try(Statement statement = conexion.createStatement()){
             statement.execute("use gestorcontabledb");
-            ResultSet resultSet = (ResultSet) statement.executeQuery("select * from usuarios where contraseña = 'superAdministrador'");
+            ResultSet resultSet = (ResultSet) statement.executeQuery("select * from usuarios where contraseña = 'admin'");
             if(resultSet.next()){
                 return true;
             }else {
@@ -104,7 +126,7 @@ public class Conexion {
         try(Statement statement = conexion.createStatement()) {
             statement.execute("use gestorcontabledb");
             statement.execute("create user if not exists '"+usuario+"'@'localhost' IDENTIFIED by '"+password+"';");
-            statement.execute("grant all privileges on gestorContableDB to '"+usuario+"'@'localhost'");
+            statement.execute("grant all privileges on gestorContableDB.* to '"+usuario+"'@'localhost'");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -39,6 +39,7 @@ public class GestionContableApp extends Application {
         conexion.setBaseConnection();
         if (!conexion.isCreated()){
             conexion.createDB();
+            conexion.populatePruebaDB();
         }
 
         return conexion;

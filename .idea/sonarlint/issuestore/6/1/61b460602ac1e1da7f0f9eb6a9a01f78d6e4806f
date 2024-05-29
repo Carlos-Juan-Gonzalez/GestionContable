@@ -1,28 +1,28 @@
 
-	java:S112i"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Ş¼°ıû1J$14cc1ca4-4f22-4297-bb4a-64a0b3621f3c
-	java:S112˜"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Ş¼°ıû1J$2073b580-91dd-4306-8847-3c4c6ffc8311
-“	java:S1173"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ¢®Ş8â¼°ıû1J$797f2d9c-dc73-479d-bce2-f36fd2a8ec77
-“	java:S1173"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ¢®Ş8â¼°ıû1J$6508a541-71db-4219-8aa9-2059812c5a4e
-˜	java:S117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªäÃºıÿÿÿÿ8â¼°ıû1J$aed4f99c-fe05-4053-99b0-c3a18ec6acc6
-˜	java:S117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªäÃºıÿÿÿÿ8â¼°ıû1J$a64107cd-84e4-4782-bd8e-a5d4bc41c080
+	java:S112i"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Íæ£ü1J$a8d80130-cfa3-4830-9379-420f5d1b2da6
+	java:S112Ÿ"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Íæ£ü1J$eb6e7afa-9958-4ad2-9cfe-4e64ffd07c4e
+“	java:S1173"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ¢®Ş8Îæ£ü1J$00229759-b954-4a5d-bf7b-85b77a1d3202
+“	java:S1173"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ¢®Ş8Îæ£ü1J$cc9ae8ab-35bd-4b78-b5e8-bf14beeaead9
+˜	java:S117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªäÃºıÿÿÿÿ8Îæ£ü1J$245f9fab-4d7f-418d-9283-dea7d94aad78
+˜	java:S117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªäÃºıÿÿÿÿ8Îæ£ü1J$25bf3a87-07a9-4aa0-8206-3b445c1bfe50
 x
-java:S1659"0Declare "passwordValidation" on a separate line.(´ñ—ıÿÿÿÿ8‘½°ıû1J$0f150bd5-447d-4983-af55-b7c7fd2289de
+java:S1659"0Declare "passwordValidation" on a separate line.(´ñ—ıÿÿÿÿ8ïæ£ü1J$c809b685-93fd-473c-babd-2c5ac8b71a92
 t
-java:S1874%",Remove this use of "exec"; it is deprecated.(‰‚¤şÿÿÿÿ8–½°ıû1J$3a113e9b-bfef-4028-9398-26547f426e10
-r	java:S106'"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8˜½°ıû1J$55c5ff50-942e-4a43-ae71-a168e437c488
-	java:S1002"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±Ş©Œ8¢½°ıû1J$bbd501bb-dc0d-4804-acc9-8d865993856b
+java:S1874%",Remove this use of "exec"; it is deprecated.(‰‚¤şÿÿÿÿ8úæ£ü1J$5d22359b-fd68-488d-b521-dfd63bdedbbe
+r	java:S106'"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8ıæ£ü1J$d17356ce-1488-4366-bfd8-ad2b7fc23d08
+	java:S1002"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±Ş©Œ8ç£ü1J$da66fcbf-5e85-418f-bd64-3527190d8491
 u
-java:S16593"2Declare "contraseÃ±avalidador" on a separate line.(ÿ¢®Ş8¥½°ıû1J$0ff5ef9f-d5b6-4de0-85a5-aa3da8dbb4a2
+java:S16593"2Declare "contraseÃ±avalidador" on a separate line.(ÿ¢®Ş8‚ç£ü1J$6a23e909-8df1-40b6-82b3-7aee1a682a6d
 }
-java:S1117:";Rename "usuario" which hides the field declared at line 27.(˜´98§½°ıû1J$b540d861-e249-4bf4-bd85-81d59d88aa26
-•	java:S100J"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªäÃºıÿÿÿÿ8µ½°ıû1J$dee95369-69d2-4315-a05b-3604b8890658
+java:S1117:";Rename "usuario" which hides the field declared at line 27.(˜´98„ç£ü1J$fa8f34d3-b777-41d4-ad28-eaae42619680
+•	java:S100J"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªäÃºıÿÿÿÿ8…ç£ü1J$f9dc4494-4b9a-402e-b08f-decca8ad7577
 }
-java:S1117x";Rename "usuario" which hides the field declared at line 27.(˜´98Õ½°ıû1J$b41e543b-fce7-4a27-8381-4d3a6da98217
+java:S1117q";Rename "usuario" which hides the field declared at line 27.(˜´98“ç£ü1J$8023dc33-4870-49af-b8f9-907603e51a36
+}
+java:S1117}";Rename "usuario" which hides the field declared at line 27.(˜´98™ç£ü1J$4a94ad58-4361-42d2-95d2-eefda677179d
 Š
-java:S1126‡"AReplace this if-then-else statement by a single return statement.(ç…™’şÿÿÿÿ8å½°ıû1J$2cd59753-aa32-4f9b-93d3-8b1c9147550d
+java:S1126Œ"AReplace this if-then-else statement by a single return statement.(ç…™’şÿÿÿÿ8Ÿç£ü1J$b04d354b-f02d-4f22-9cf0-9fe7858d3967
 €
-java:S1128"8Remove this unused import 'javafx.application.Platform'.(§“óùÿÿÿÿ8ü½°ıû1J$32770761-6093-450f-af00-c788bbda73c5
+java:S1128"8Remove this unused import 'javafx.application.Platform'.(§“óùÿÿÿÿ8ø«ü1J$e5bd3059-e1cb-41bb-83c4-7fd65dbb8ce4
 y
-java:S1128"7Remove this unused import 'javafx.scene.control.Alert'.(ÊÇê:8ü½°ıû1J$5491b176-1665-4cfd-9fb9-9db099ae535d
-q
-java:S1068!".Remove this unused "connection" private field.(ÿ›ÅÒ8„¾°ıû1J$00181b9f-c95c-4eb7-8666-a062a2b883ad
+java:S1128"7Remove this unused import 'javafx.scene.control.Alert'.(ÊÇê:8ø«ü1J$e15ed45b-916d-4931-8f95-69a67ccdaeaa
