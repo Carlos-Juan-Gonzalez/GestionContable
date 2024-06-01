@@ -5,12 +5,8 @@ k
 ;src/main/java/proyecto/contabilidad/GestionContableApp.java,5\1\519ecf427a47b02cd5acdea5a5693c5ea049d4da
 r
 Bsrc/main/java/proyecto/contabilidad/GestionContableController.java,6\1\61b460602ac1e1da7f0f9eb6a9a01f78d6e4806f
-a
-1src/main/java/proyecto/contabilidad/Conexion.java,1\3\13d4b3048bff05767c733ee865ad9c055c0abafb
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
-`
-0src/main/java/proyecto/contabilidad/Usuario.java,f\7\f77409f997b47e71505423c97565aef171a2f893
 g
 7src/main/java/proyecto/contabilidad/MainController.java,8\d\8d7545c5b097c945a3e81518ce68d01f9f63e5cd
 S
@@ -36,13 +32,15 @@ Q.idea/sonarlint/securityhotspotstore/6/1/61b460602ac1e1da7f0f9eb6a9a01f78d6e480
 Q.idea/sonarlint/securityhotspotstore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec,2\c\2cabb939da04d3de3a200bf2b575690e1a16316d
 U
 %.mvn/wrapper/maven-wrapper.properties,3\2\32e074f71d16c1e88ac02aa83592ca6ad1fd98a8
-Å
-Q.idea/sonarlint/securityhotspotstore/1/3/13d4b3048bff05767c733ee865ad9c055c0abafb,a\f\afe9edb325183d38c3883816da8db0208a6d07b5
 l
 <src/main/java/proyecto/contabilidad/AdminMainController.java,3\6\36103074717df87e185bf3ca6353e5162fcf251c
-_
-/src/main/java/proyecto/contabilidad/Diario.java,6\c\6cd11cba5d2618b33354aab55e92a0f16382b7c7
-`
-0src/main/java/proyecto/contabilidad/Asiento.java,f\e\feabf47afdd9400f8d0bb99984a0b6fb48af92ca
+j
+:src/main/java/proyecto/contabilidad/AsientoController.java,3\7\372c483479156da723a36417401e1856535eb1fd
+a
+1src/main/java/proyecto/contabilidad/Conexion.java,1\3\13d4b3048bff05767c733ee865ad9c055c0abafb
 b
 2src/main/java/proyecto/contabilidad/Anotacion.java,5\d\5d49ec4aa7df1f88b15f0ee5db3fffbf9d188c7b
+`
+0src/main/java/proyecto/contabilidad/Asiento.java,f\e\feabf47afdd9400f8d0bb99984a0b6fb48af92ca
+_
+/src/main/java/proyecto/contabilidad/Cuenta.java,e\c\ec69198494b168e1ea55130cfac6ca1591cf05d8

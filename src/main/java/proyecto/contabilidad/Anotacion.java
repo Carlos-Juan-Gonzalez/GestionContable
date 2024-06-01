@@ -1,7 +1,18 @@
 package proyecto.contabilidad;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Anotacion {
+    private int id;
     private int cuenta_id;
+    private int codigo_cuenta;
+    private int orden;
+    private String nombre_cuenta;
     private int asiento_id;
     private int debe;
     private int haber;
@@ -14,6 +25,84 @@ public class Anotacion {
         this.asiento_id = asiento_id;
         this.haber = haber;
         this.debe = debe;
+    }
+    public Anotacion(int id,int cuenta_id,int debe, int haber,int orden,int codigo_cuenta, String nombre_cuenta) {
+        this.id = id;
+        this.cuenta_id = cuenta_id;
+        this.codigo_cuenta = codigo_cuenta;
+        this.nombre_cuenta = nombre_cuenta;
+        this.orden = orden;
+        this.debe = debe;
+        this.haber = haber;
+    }
+
+    @Override
+    public String toString() {
+        return "Anotacion{" +
+                "id=" + id +
+                ", cuenta_id=" + cuenta_id +
+                ", codigo_cuenta=" + codigo_cuenta +
+                ", orden=" + orden +
+                ", nombre_cuenta='" + nombre_cuenta + '\'' +
+                ", asiento_id=" + asiento_id +
+                ", debe=" + debe +
+                ", haber=" + haber +
+                '}';
+    }
+
+    public List<Anotacion> constructAnotaciones(Connection connection, int id){
+        List<Anotacion> anotaciones = new ArrayList<Anotacion>();
+        try (Statement statement = connection.createStatement()){
+
+            ResultSet rs = statement.executeQuery("select anotaciones.id, anotaciones.cuenta_id, anotaciones.debe, " +
+                    "anotaciones.haber,anotaciones.orden, cuentas.codigo,cuentas.nombre from anotaciones inner join" +
+                    " cuentas on anotaciones.cuenta_id = cuentas.id where anotaciones.asiento_id = "+id);
+
+            while (rs.next()){
+                anotaciones.add(new Anotacion(rs.getInt(1),rs.getInt(2),rs.getInt(3),
+                        rs.getInt(4),rs.getInt(5),rs.getInt(6),rs.getString(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return anotaciones;
+    }
+    public void updateAnotacion(Connection connection){
+        try (Statement statement = connection.createStatement()){
+            statement.executeUpdate("update anotaciones set cuenta_id = "+cuenta_id+", debe = "+debe+", haber = "+haber+ " where id = " +id);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public void insertAnotacion(Connection connection,int asiento){
+        try (Statement statement = connection.createStatement()){
+            statement.execute("insert into anotaciones (cuenta_id,asiento_id,orden,debe,haber) values " +
+                    "("+cuenta_id+","+asiento+","+orden+","+debe+","+haber+")");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public void deleteAnotacion(Connection connection){
+        try (Statement statement = connection.createStatement()){
+            statement.executeUpdate("delete from anotaciones where orden = " + orden);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public boolean exists(Connection connection){
+        try (Statement statement = connection.createStatement()){
+            ResultSet rs = statement.executeQuery("select * from cuentas where id = "+ id);
+
+            if (rs.next()){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
     }
 
     public int getCuenta_id() {
@@ -46,5 +135,29 @@ public class Anotacion {
 
     public void setHaber(int haber) {
         this.haber = haber;
+    }
+
+    public String getNombre_cuenta() {
+        return nombre_cuenta;
+    }
+
+    public void setNombre_cuenta(String nombre_cuenta) {
+        this.nombre_cuenta = nombre_cuenta;
+    }
+
+    public int getCodigo_cuenta() {
+        return codigo_cuenta;
+    }
+
+    public void setCodigo_cuenta(int codigo_cuenta) {
+        this.codigo_cuenta = codigo_cuenta;
+    }
+
+    public int getOrden() {
+        return orden;
+    }
+
+    public void setOrden(int orden) {
+        this.orden = orden;
     }
 }

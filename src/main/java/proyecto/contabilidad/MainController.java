@@ -4,20 +4,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class MainController {
     @FXML
@@ -27,6 +27,7 @@ public class MainController {
     private Diario diario;
     private Usuario usuario;
     private Connection connection;
+    private MainController controller;
 
 
     public void link(){
@@ -46,6 +47,15 @@ public class MainController {
 
     public void setDiarioContent(){
         createTableColumns();
+        tabla.setRowFactory(tableView -> {
+            TableRow<Asiento> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && row.getItem() != null) {
+                    cambiarAsientoView(row.getItem());
+                }
+            });
+            return row;
+        });
         tabla.setItems(createObservable());
     }
     public void createTableColumns(){
@@ -76,10 +86,30 @@ public class MainController {
         return FXCollections.observableList(asiento.constructAsientos(connection, diario.getId()));
     }
 
-    public void setAtributes(Diario diario,Usuario usuario,Connection connection){
+    public void setAtributes(Diario diario,Usuario usuario,Connection connection,MainController controller){
         this.diario = diario;
         this.usuario = usuario;
         this.connection = connection;
+        this.controller = controller;
+    }
+
+    public void cambiarAsientoView(Asiento asiento){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AsientoView.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(),500,350);
+            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+            AsientoController controller = fxmlLoader.getController();
+            controller.setGitIcon();
+            controller.setAtributes(connection,controller, asiento,this.controller);
+            controller.setAsientoContent();
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

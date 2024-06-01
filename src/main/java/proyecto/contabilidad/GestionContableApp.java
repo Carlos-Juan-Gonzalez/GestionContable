@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 public class GestionContableApp extends Application {
     @Override

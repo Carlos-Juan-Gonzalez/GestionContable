@@ -8,4 +8,5 @@ module proyecto.contabilidad {
 
     opens proyecto.contabilidad to javafx.fxml;
     exports proyecto.contabilidad;
+
 }

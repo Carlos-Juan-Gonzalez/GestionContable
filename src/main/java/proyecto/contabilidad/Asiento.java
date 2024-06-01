@@ -18,7 +18,9 @@ public class Asiento {
     public Asiento(){
 
     }
-    public Asiento(int numero, String fecha, String descripcion,int balance) {
+    public Asiento(int id,int diario_id,int numero, String fecha, String descripcion,int balance) {
+        this.id = id;
+        this.diario_id = diario_id;
         this.numero = numero;
         this.fecha = fecha;
         this.descripcion = descripcion;
@@ -38,13 +40,20 @@ public class Asiento {
 
             ResultSet rs = statement.executeQuery("select * from asientos where diario_id = "+id);
             while (rs.next()){
-                asientos.add(new Asiento(rs.getInt(3),rs.getString(4),rs.getString(5),
-                        getBalanceAsiento(connection,rs.getInt(1))));
+                asientos.add(new Asiento(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),
+                        rs.getString(5),getBalanceAsiento(connection,rs.getInt(1))));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return asientos;
+    }
+    public void updateAsiento(Connection connection){
+        try (Statement statement = connection.createStatement()){
+            statement.executeUpdate("update asientos set fecha = '"+fecha+"', descripcion = '"+descripcion+"' where id = "+id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getBalanceAsiento(Connection connection,int id){
@@ -88,12 +97,12 @@ public class Asiento {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
     public int getBalance() {
         return balance;
     }
-
     public void setBalance(int balance) {
         this.balance = balance;
     }
+
+
 }
