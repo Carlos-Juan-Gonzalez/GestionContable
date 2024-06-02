@@ -23,7 +23,7 @@
                         </VBox>
                         <VBox>
                                 <HBox minHeight="37.5" minWidth="250" alignment="BOTTOM_CENTER" spacing="10">
-                                        <Button styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#actualizar">Actualizar Asiento</Button>
+                                        <Button text="Crear Asiento" styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#crearAsiento" fx:id="action"/>
                                 </HBox>
                                 <HBox minHeight="37.5" minWidth="250" alignment="BOTTOM_CENTER" spacing="10">
                                         <Button styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#newRow">Nueva Fila</Button>

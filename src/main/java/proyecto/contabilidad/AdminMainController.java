@@ -53,7 +53,7 @@ public class AdminMainController {
             TableRow<Asiento> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && row.getItem() != null) {
-                    cambiarAsientoView(row.getItem());
+                    cambiarAsientoViewActualizar(row.getItem());
                 }
             });
             return row;
@@ -95,7 +95,34 @@ public class AdminMainController {
         this.controller = controller;
     }
 
-    public void cambiarAsientoView(Asiento asiento){
+    public void cambiarAsientoView(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AsientoView.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(),500,350);
+            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+            AsientoController controller = fxmlLoader.getController();
+            controller.setGitIcon();
+            controller.setAtributes(connection,controller,new Asiento(diario.getId(),createObservable().size()+1),this.controller);
+            controller.createTableColumns();
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Gestor Contable");
+            stage.getIcons().add(new Image(GestionContableApp.class.getResource("icons/gestorContableIcon.png").toString()));
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    event.consume();
+                }
+            });
+            stage.show();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void cambiarAsientoViewActualizar(Asiento asiento){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AsientoView.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load(),500,350);
@@ -109,12 +136,12 @@ public class AdminMainController {
             stage.setResizable(false);
             stage.setTitle("Gestor Contable");
             stage.getIcons().add(new Image(GestionContableApp.class.getResource("icons/gestorContableIcon.png").toString()));
-           /* stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
                     event.consume();
                 }
-            });*/
+            });
             stage.show();
 
         } catch (IOException e) {

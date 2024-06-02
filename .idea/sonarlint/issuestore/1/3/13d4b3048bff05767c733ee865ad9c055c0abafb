@@ -4,14 +4,14 @@
 ‡	java:S112ƒ"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒιόÿÿÿÿJ$0ae61ed5-8195-40f1-8d1e-07d3f4a972a6
 X
 java:S1700"Rename field "conexion"(ƒ³ςδϊÿÿÿÿJ$35777e13-ae55-4f14-accb-8424ef4f3d25
-‹
-java:S2095`"HUse try-with-resources or close this "FileReader" in a "finally" clause.(φ©»ί8«Ψαπό1J$d4bb7519-13ef-4c2f-a6f3-556982bfdcbc
-”
-java:S2095a"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(€§Ξ ύÿÿÿÿ8«Ψαπό1J$bcce688a-53ad-423f-a47f-7104b66ecae4
-
-java:S2095K"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(€§Ξ ύÿÿÿÿJ$9d7edecd-2e6b-4e0c-8219-e92af445103a
 „
 java:S2095J"HUse try-with-resources or close this "FileReader" in a "finally" clause.(φ©»ίJ$a7e307ba-86f8-43db-9636-66455aada8f9
+”
+java:S2095a"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(€§Ξ ύÿÿÿÿ8«Ψαπό1J$bcce688a-53ad-423f-a47f-7104b66ecae4
+‹
+java:S2095`"HUse try-with-resources or close this "FileReader" in a "finally" clause.(φ©»ί8«Ψαπό1J$d4bb7519-13ef-4c2f-a6f3-556982bfdcbc
+
+java:S2095K"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(€§Ξ ύÿÿÿÿJ$9d7edecd-2e6b-4e0c-8219-e92af445103a
 ]
 java:S1170"!Make this final field static too.(ρ΄γΤJ$d3c1c7d1-0c7d-4e66-b04c-54d40f538f87
 ]
@@ -43,6 +43,6 @@ java:S6905q"Don't use the query "SELECT *".(ΖϋεϋÿÿÿÿJ$d9a51fca-ff3d-43ee-8f3
 java:S1126r"AReplace this if-then-else statement by a single return statement.(‡ά‘J$9322e81f-d1c5-46bd-8f0e-7e58bbe16996
 r	java:S106x"+Replace this use of System.out by a logger.(¨¶ΡΝώÿÿÿÿ8±από1J$7b8db03b-9a2f-4ec5-a4b8-dccf860ec161
 ’
-java:S6912d"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Α»”φJ$eb92ebf9-9909-4cfe-be79-c0d41e6050e5
-’
 java:S6912N"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Α»”φJ$313c0261-6be5-4832-b5ca-8647e557b26b
+’
+java:S6912d"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Α»”φJ$eb92ebf9-9909-4cfe-be79-c0d41e6050e5

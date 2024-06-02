@@ -2,6 +2,7 @@ package proyecto.contabilidad;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -24,6 +25,8 @@ public class AsientoController {
     @FXML
     protected Hyperlink link;
     @FXML
+    protected Button action;
+    @FXML
     protected TableView tabla;
     @FXML
     protected DatePicker fecha;
@@ -34,7 +37,7 @@ public class AsientoController {
     private AsientoController controller;
     private AdminMainController adminparenteController;
     private MainController parenteController;
-    private ObservableList<Anotacion> anotaciones;
+    private ObservableList<Anotacion> anotaciones = FXCollections.observableList(new ArrayList<>());
     private List<Cuenta> cuentas;
 
 
@@ -55,10 +58,21 @@ public class AsientoController {
 
     public void setAsientoContent(){
         createTableColumns();
+        cambiarAction();
         fecha.setValue(LocalDate.parse(asiento.getFecha()));
         descripcion.setText(asiento.getDescripcion());
         createObservable();
         tabla.setItems(anotaciones);
+    }
+
+    public void cambiarAction(){
+        action.setText("Actualizar Asiento");
+        action.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                actualizar();
+            }
+        });
     }
 
     @FXML
@@ -82,10 +96,29 @@ public class AsientoController {
         }
     }
 
+    @FXML void crearAsiento(){
+        if(isAllSet()){
+            asiento.setDescripcion(descripcion.getText());
+            asiento.setFecha(fecha.getValue().toString());
+            asiento.insertAsiento(connection);
+            if(isBalanced()){
+                for (Anotacion a : anotaciones){
+                    a.insertAnotacion(connection,asiento.getId());
+                }
+                adminparenteController.setDiarioContent();
+                ((Stage)tabla.getScene().getWindow()).close();
+            }else{
+                balancedAlert();
+            }
+        }else {
+            allSetAler();
+        }
+    }
+
     @FXML
     public void actualizar(){
-        actualizarAsiento();
         if(isAllSet()){
+            actualizarAsiento();
             if(isBalanced()){
                 List<Anotacion> dbAnotaciones = new Anotacion().constructAnotaciones(connection,asiento.getId());
                 int indice = (dbAnotaciones.size() < anotaciones.size()) ? anotaciones.size() : dbAnotaciones.size();
@@ -197,6 +230,9 @@ public class AsientoController {
     }
 
     public boolean isAllSet(){
+        if (fecha.getValue().toString() == "" || descripcion.getText() == ""){
+            return false;
+        }
         for (Anotacion anotacion : anotaciones){
             if (anotacion.getCodigo_cuenta() == 0 ||(anotacion.getDebe() == 0 && anotacion.getHaber() == 0)){
                 return false;
@@ -208,7 +244,7 @@ public class AsientoController {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Anotaciones Vacias");
         alert.setHeaderText(null);
-        alert.setContentText("Hay anotaciones en el asiento sin contenido.");
+        alert.setContentText("Hay campos sin contenido en el asiento.");
         alert.showAndWait();
     }
 

@@ -18,6 +18,10 @@ public class Asiento {
     public Asiento(){
 
     }
+    public Asiento(int diario_id, int numero){
+        this.diario_id = diario_id;
+        this.numero = numero;
+    }
     public Asiento(int id,int diario_id,int numero, String fecha, String descripcion,int balance) {
         this.id = id;
         this.diario_id = diario_id;
@@ -51,6 +55,19 @@ public class Asiento {
     public void updateAsiento(Connection connection){
         try (Statement statement = connection.createStatement()){
             statement.executeUpdate("update asientos set fecha = '"+fecha+"', descripcion = '"+descripcion+"' where id = "+id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void insertAsiento(Connection connection){
+        try (Statement statement = connection.createStatement()){
+             statement.executeUpdate("insert into asientos (diario_id,numero,fecha,descripcion) values " +
+                    "("+diario_id+","+numero+",'"+fecha+"','"+descripcion+"')");
+             ResultSet rs = statement.executeQuery("select id from asientos where numero = "+numero+" and fecha = '"+fecha+"'");
+
+             while (rs.next()){
+                 this.id = rs.getInt(1);
+             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
