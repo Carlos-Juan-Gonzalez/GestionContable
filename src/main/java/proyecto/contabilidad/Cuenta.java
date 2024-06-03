@@ -19,6 +19,11 @@ public class Cuenta {
         this.codigo = codigo;
         this.nombre = nombre;
     }
+    public Cuenta(int codigo, String nombre) {
+        this.id = id;
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
 
     public List<Cuenta> constructCuentas(Connection connection, int id){
         List<Cuenta> cuentas = new ArrayList<Cuenta>();
@@ -33,6 +38,15 @@ public class Cuenta {
             throw new RuntimeException(e);
         }
         return cuentas;
+    }
+
+    public void insertCuenta(Connection connection, int id){
+        try (Statement statement = connection.createStatement()){
+
+            statement.executeUpdate("insert into cuentas (diario_id,codigo,nombre) values ("+id+","+codigo+",'"+nombre+"')");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     public int getCuentaID(Connection connection, int codigo){
         int id = 0;

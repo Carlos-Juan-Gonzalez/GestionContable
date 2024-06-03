@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Label?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.contabilidad.AdminMainController">
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Codigo de cuenta"/>
+            <TextField promptText="Codigo" maxWidth="200" fx:id="codigo"/>
+            <Label text="Nombre de Cuenta"/>
+            <TextField promptText="Nombre" maxWidth="200" fx:id="nombre"/>
+            <Text fx:id="alert" visible="false"></Text>
+            <Button onAction="#crearCuenta" styleClass="btn,btn-primary" style="-fx-background-color: #5c67fa">Crear Cuenta</Button>
+        </VBox>
+    </center>
+</BorderPane>

@@ -44,3 +44,7 @@ b
 0src/main/java/proyecto/contabilidad/Asiento.java,f\e\feabf47afdd9400f8d0bb99984a0b6fb48af92ca
 _
 /src/main/java/proyecto/contabilidad/Cuenta.java,e\c\ec69198494b168e1ea55130cfac6ca1591cf05d8
+`
+0src/main/java/proyecto/contabilidad/Usuario.java,f\7\f77409f997b47e71505423c97565aef171a2f893
+_
+/src/main/java/proyecto/contabilidad/Diario.java,6\c\6cd11cba5d2618b33354aab55e92a0f16382b7c7

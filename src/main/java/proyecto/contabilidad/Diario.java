@@ -16,6 +16,9 @@ public class Diario {
         this.id = id;
         this.nombre = nombre;
     }
+    public Diario(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Diario constructDiario(Connection connection,int diario_id){
         Diario diario;
@@ -29,6 +32,16 @@ public class Diario {
             throw new RuntimeException(e);
         }
         return diario;
+    }
+
+    public void insertDiario(Connection connection){
+        try (Statement statement = connection.createStatement()){
+
+            statement.executeUpdate("insert into diarios (nombre) values ('"+nombre+"')");
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getId() {

@@ -144,29 +144,23 @@ public class GestionContableController{
     }
     public void cambiarMainView(Usuario usuario,Diario diario){
         FXMLLoader fxmlLoader;
-        boolean flag = false;
+
         if (usuario.getPermiso_id() == 1){
             fxmlLoader = new FXMLLoader(getClass().getResource("AdminMainView.fxml"));
-            flag = true;
+
         }else {
             fxmlLoader = new FXMLLoader(getClass().getResource("MainView.fxml"));
         }
         try {
             Scene scene = new Scene(fxmlLoader.load(),800,600);
             scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-            if (flag){
-                AdminMainController controller = fxmlLoader.getController();
-                controller.setGitIcon();
-                controller.setAtributes(diario,usuario,connection,controller);
-                controller.setDiarioContent();
-                ((Stage) this.usuario.getScene().getWindow()).setScene(scene);
-            }else{
-                MainController controller = fxmlLoader.getController();
-                controller.setGitIcon();
-                controller.setAtributes(diario,usuario,connection,controller);
-                controller.setDiarioContent();
-                ((Stage) this.usuario.getScene().getWindow()).setScene(scene);
-            }
+            MainController controller = fxmlLoader.getController();
+            controller.setGitIcon();
+            controller.setAtributes(diario,usuario,connection,controller);
+            ((AdminMainController) controller).setController(controller);
+            controller.setDiarioContent();
+            ((Stage) this.usuario.getScene().getWindow()).setScene(scene);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

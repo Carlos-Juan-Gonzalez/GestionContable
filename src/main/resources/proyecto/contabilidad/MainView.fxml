@@ -9,6 +9,11 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Hyperlink?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.contabilidad.MainController">
+    <top>
+        <HBox alignment="CENTER_LEFT" minHeight="35" style="-fx-background-color: #5c67fa">
+            <Button text="Nuevo Asiento" styleClass="btn,btn-primary" style="-fx-background-color: #5c67fa" onAction="#cambiarAsientoView"/>
+        </HBox>
+    </top>
     <center>
         <TableView fx:id="tabla"></TableView>
     </center>

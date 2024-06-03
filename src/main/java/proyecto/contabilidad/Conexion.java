@@ -110,7 +110,7 @@ public class Conexion {
     public boolean isFirstLoging(){
         try(Statement statement = conexion.createStatement()){
             statement.execute("use gestorcontabledb");
-            ResultSet resultSet = (ResultSet) statement.executeQuery("select * from usuarios where contraseña = 'admin'");
+            ResultSet resultSet = (ResultSet) statement.executeQuery("select * from usuarios where contraseña = ''");
             if(resultSet.next()){
                 return true;
             }else {

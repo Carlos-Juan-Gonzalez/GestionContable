@@ -1,48 +1,48 @@
 
-†	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$60718fa4-8b44-4ae6-94ae-d2eabb3d55cd
-†	java:S112'"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$c649971b-5ffc-40ad-b447-a3b4f02dc2b9
-‡	java:S112ƒ"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$0ae61ed5-8195-40f1-8d1e-07d3f4a972a6
+†	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$a6c5591c-5037-4aac-9a6c-6138cc626e0d
+†	java:S112'"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$10d685fa-e30f-4aec-ae77-993375e943b5
+‡	java:S112ƒ"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$c943de2b-edc5-4a1e-a6f4-d64e3d83c3a7
 X
-java:S1700"Rename field "conexion"(ƒ³òäúÿÿÿÿJ$35777e13-ae55-4f14-accb-8424ef4f3d25
+java:S1700"Rename field "conexion"(ƒ³òäúÿÿÿÿJ$88805a3c-bc74-42d5-940c-78b0be176864
 „
-java:S2095J"HUse try-with-resources or close this "FileReader" in a "finally" clause.(ö©»ßJ$a7e307ba-86f8-43db-9636-66455aada8f9
-”
-java:S2095a"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(€§Î ıÿÿÿÿ8«Øáğü1J$bcce688a-53ad-423f-a47f-7104b66ecae4
-‹
-java:S2095`"HUse try-with-resources or close this "FileReader" in a "finally" clause.(ö©»ß8«Øáğü1J$d4bb7519-13ef-4c2f-a6f3-556982bfdcbc
+java:S2095J"HUse try-with-resources or close this "FileReader" in a "finally" clause.(ö©»ßJ$0c144c89-8c95-4592-aa4d-39adbc6953d1
 
-java:S2095K"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(€§Î ıÿÿÿÿJ$9d7edecd-2e6b-4e0c-8219-e92af445103a
+java:S2095K"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(€§Î ıÿÿÿÿJ$829fb424-946e-4e3c-ae4f-cc22d4eda3ce
+”
+java:S2095a"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(€§Î ıÿÿÿÿ8«Øáğü1J$8f8cfa93-d249-4a84-8700-43d3565970e7
+‹
+java:S2095`"HUse try-with-resources or close this "FileReader" in a "finally" clause.(ö©»ß8«Øáğü1J$f16d941f-c752-4c71-b3b7-820f3c1da2bb
 ]
-java:S1170"!Make this final field static too.(ñ´ãÔJ$d3c1c7d1-0c7d-4e66-b04c-54d40f538f87
+java:S1170"!Make this final field static too.(ñ´ãÔJ$115049a7-27bf-4556-89b1-61074aca43be
 ]
-java:S1170	"!Make this final field static too.(Ò± ­J$be092d78-4ea6-4060-b668-b2844666ef07
+java:S1170	"!Make this final field static too.(Ò± ­J$a6f0ba60-b370-472e-9f48-d49859d1337a
 ]
 java:S1170
-"!Make this final field static too.(€ê¿òJ$f8fbd711-b71c-4ce3-a264-0eeffdf4a46d
+"!Make this final field static too.(€ê¿òJ$5d77c6ec-83fc-42a2-aa80-ad29fb900c9c
 
-java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ñ´ãÔJ$e2338469-84c8-47f1-90d5-be4777b70b1c
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ñ´ãÔJ$75c26d6f-efe3-4fd7-9bc3-ff99e55184a0
 
-java:S1124	"EReorder the modifiers to comply with the Java Language Specification.(Ò± ­J$5bf7c989-3eb9-4f58-a59a-8bc3eeda3ce1
+java:S1124	"EReorder the modifiers to comply with the Java Language Specification.(Ò± ­J$3004aedc-0515-43f4-afa4-65f0df7db350
 
 java:S1124
-"EReorder the modifiers to comply with the Java Language Specification.(€ê¿òJ$a44a7917-7b0d-4047-8a50-f048d5c57e97
+"EReorder the modifiers to comply with the Java Language Specification.(€ê¿òJ$a41cd482-8f79-4281-abae-426ad34e941d
 r
-java:S6437"6Revoke and change this password, as it is compromised.(Í‚éØJ$a38d4252-ffc1-41f9-a8fc-4c405985652e
+java:S6437"6Revoke and change this password, as it is compromised.(Í‚éØJ$048d8de6-ac3e-4e96-8883-6fab441a8520
 }
-java:S1117#"<Rename "conexion" which hides the field declared at line 11.(êº„ŠøÿÿÿÿJ$7d293f88-131d-47f9-abe0-c3abac16d6fc
+java:S1117#"<Rename "conexion" which hides the field declared at line 11.(êº„ŠøÿÿÿÿJ$fccac192-bce8-4abd-a6fc-1c86061b6e27
 }
-java:S11265"AReplace this if-then-else statement by a single return statement.(Œ‡Ü‘J$37b1f1d9-2f54-44aa-873f-5aab9353ad9b
-k	java:S106;"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿJ$e6d100bb-758d-40d1-88b6-39b0ecc3be4e
-k	java:S106T"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿJ$7878913d-30a9-436f-9657-3a91a2df3f4d
-k	java:S106j"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿJ$67e0ff6e-add4-45ea-88f2-b35b13adc381
+java:S11265"AReplace this if-then-else statement by a single return statement.(Œ‡Ü‘J$3257883f-b6d6-429e-973a-cc74f664f945
+k	java:S106;"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿJ$714cc01b-4837-421f-b1a9-7910977e3516
+k	java:S106T"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿJ$51ffd105-9375-4ca0-9f31-b17a90b382fd
+k	java:S106j"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿJ$365216ca-d7d7-4a43-b7dc-e9a9912d362d
 m
-java:S1905q",Remove this unnecessary cast to "ResultSet".(ÆšûåûÿÿÿÿJ$c3d81a07-dbcc-45d5-859b-6775dbfc18d3
+java:S1905q",Remove this unnecessary cast to "ResultSet".(Ïû–ŸÿÿÿÿÿJ$f7f6d0dd-da8e-4b6d-9add-355b56a2a321
 `
-java:S6905q"Don't use the query "SELECT *".(ÆšûåûÿÿÿÿJ$d9a51fca-ff3d-43ee-8f3e-abd5a26ed626
+java:S6905q"Don't use the query "SELECT *".(Ïû–ŸÿÿÿÿÿJ$746d882b-b47e-4e55-a8e4-326a1bb17456
 }
-java:S1126r"AReplace this if-then-else statement by a single return statement.(Œ‡Ü‘J$9322e81f-d1c5-46bd-8f0e-7e58bbe16996
-r	java:S106x"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8±áğü1J$7b8db03b-9a2f-4ec5-a4b8-dccf860ec161
+java:S1126r"AReplace this if-then-else statement by a single return statement.(Œ‡Ü‘J$17c84cd8-10b0-4ce1-bf0c-0efd753430e6
+r	java:S106x"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8±áğü1J$7c8af543-ac6a-43cc-9cd4-26de424bde10
 ’
-java:S6912N"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Á»”öJ$313c0261-6be5-4832-b5ca-8647e557b26b
+java:S6912N"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Á»”öJ$0a8b6433-56f1-4fd1-88b7-eb4b3eca0b31
 ’
-java:S6912d"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Á»”öJ$eb92ebf9-9909-4cfe-be79-c0d41e6050e5
+java:S6912d"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Á»”öJ$a1e97a72-34f1-48eb-bc20-49b87e52999a
