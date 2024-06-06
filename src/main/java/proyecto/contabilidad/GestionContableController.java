@@ -30,6 +30,9 @@ public class GestionContableController{
     protected Text alert;
     private Connection connection;
 
+    /**
+     * Redirecciona a el enlaze de git hub en el navegado predetermidano
+     */
     public void link(){
         try {
             Runtime.getRuntime().exec("cmd.exe /c start iexplore https://github.com/Carlos-Juan-Gonzalez");
@@ -38,12 +41,18 @@ public class GestionContableController{
         }
     }
 
+    /**
+     * settea la imagen de github a el HyperLink
+     */
     public void setGitIcon(){
         imagen.setImage(new Image(GestionContableApp.class.getResource("icons/gitIcon.png").toString()));
         link.setGraphic(imagen);
         link.setBorder(null);
     }
 
+    /**
+     * Cambia la contraseña inicial del administrador del programa
+     */
     @FXML
     public void indexContraseña(){
         String contraseña, contraseñavalidador;
@@ -85,11 +94,18 @@ public class GestionContableController{
         }
     }
 
+    /**
+     * Crea una conexion a la base de datos con el usuario validado
+     * @param conexion Conexion: instancia de conexion con la base de datos
+     */
     public void conectarUsuario(Conexion conexion){
         conexion.createNewUser(usuario.getText(),password.getText());
         this.connection = conexion.setConnection(usuario.getText(),password.getText());
     }
 
+    /**
+     * Crea y muesta la vista LoginView
+     */
     public void cambiarLoginView(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginView.fxml"));
@@ -104,6 +120,9 @@ public class GestionContableController{
         }
     }
 
+    /**
+     * Maneja el login validando la entrada de datos
+     */
     @FXML
     public void login(){
         Conexion conexion = new Conexion();
@@ -119,6 +138,11 @@ public class GestionContableController{
         }
     }
 
+    /**
+     * Valida que todos los campos introducidos sean correctos
+     * @param conexion Conexión: Instancia de conexion con la base de datos
+     * @return boolean: true si todo es correcto,false si no
+     */
     public boolean validarLogin(Conexion conexion){
         Usuario usuario = new Usuario();
         conexion.setBaseConnection();
@@ -134,6 +158,11 @@ public class GestionContableController{
         }
         return true;
     }
+
+    /**
+     * Valida que todos los campos tengan contenido
+     * @return boolean: true si todo tiene contenido,false si no
+     */
     public boolean validarInputLogin(){
         if (usuario.getText().isBlank() ||password.getText().isBlank()){
 
@@ -142,12 +171,16 @@ public class GestionContableController{
             return true;
         }
     }
+
+    /**
+     * Crea y muestra la vista MainView
+     * @param usuario Usuario: usuario activo
+     * @param diario Diario: diario asociado al usuario activo
+     */
     public void cambiarMainView(Usuario usuario,Diario diario){
         FXMLLoader fxmlLoader;
-
         if (usuario.getPermiso_id() == 1){
             fxmlLoader = new FXMLLoader(getClass().getResource("AdminMainView.fxml"));
-
         }else {
             fxmlLoader = new FXMLLoader(getClass().getResource("MainView.fxml"));
         }
@@ -157,7 +190,12 @@ public class GestionContableController{
             MainController controller = fxmlLoader.getController();
             controller.setGitIcon();
             controller.setAtributes(diario,usuario,connection,controller);
-            ((AdminMainController) controller).setController(controller);
+            if(usuario.getPermiso_id() == 1){
+                ((AdminMainController) controller).setController(controller);
+            }
+            if(usuario.getPermiso_id() == 3){
+                controller.prepareInvitado();
+            }
             controller.setDiarioContent();
             ((Stage) this.usuario.getScene().getWindow()).setScene(scene);
 

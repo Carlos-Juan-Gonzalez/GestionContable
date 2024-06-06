@@ -3,6 +3,8 @@ package proyecto.contabilidad;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Diario {
 
@@ -32,6 +34,36 @@ public class Diario {
             throw new RuntimeException(e);
         }
         return diario;
+    }
+
+    public List<String> constructDiarios(Connection connection){
+        List<String> diarios = new ArrayList<>();
+        try (Statement statement = connection.createStatement()){
+
+            ResultSet rs = statement.executeQuery("select nombre from diarios");
+            while (rs.next()){
+              diarios.add(rs.getString(1));
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return diarios;
+    }
+
+    public int getDiarioIDByName(Connection connection,String nombre){
+        int id = 0;
+        try (Statement statement = connection.createStatement()){
+
+            ResultSet rs = statement.executeQuery("select id from diarios where nombre = '"+nombre+"'");
+            while (rs.next()){
+                id = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return id;
     }
 
     public void insertDiario(Connection connection){

@@ -23,6 +23,12 @@ public class Usuario {
         this.nombre = nombre;
         this.contraseña = contraseña;
     }
+    public Usuario(int permiso_id,int diario_id, String nombre,String contraseña) {
+        this.permiso_id = permiso_id;
+        this.diario_id = diario_id;
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+    }
 
 
     public void cambiarContraseñaAdmin(Connection connection,String contraseña){
@@ -48,6 +54,15 @@ public class Usuario {
             System.out.println(e);
         }
         return false;
+    }
+
+    public void insertUsuario(Connection conexion){
+        try(Statement statement = conexion.createStatement()){
+            statement.executeUpdate("insert into usuarios (permiso_id,diario_id,usuario,contraseña) values " +
+                    "("+permiso_id+","+diario_id+",'"+nombre+"','"+contraseña+"')");
+        }catch (SQLException e){
+            System.out.println(e);
+        }
     }
 
     public Usuario constructUsuario(Connection connection,String user){

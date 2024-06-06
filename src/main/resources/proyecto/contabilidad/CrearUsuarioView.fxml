@@ -24,6 +24,8 @@
             </ComboBox>
             <Label text="Nombre de Usuario"/>
             <TextField promptText="Nombre" maxWidth="200" fx:id="nombre"/>
+            <Label text="Contraseña de Usuario"/>
+            <PasswordField promptText="Contraseña" maxWidth="200" fx:id="contraseña"/>
             <Text fx:id="alert" visible="false"></Text>
             <Button onAction="#crearUsuario" styleClass="btn,btn-primary" style="-fx-background-color: #5c67fa">Crear Usuario</Button>
         </VBox>

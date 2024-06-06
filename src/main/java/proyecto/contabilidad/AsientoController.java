@@ -20,12 +20,13 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AsientoController {
     @FXML
     protected Hyperlink link;
     @FXML
-    protected Button action;
+    protected Button action,delete,nuevo,borrar;
     @FXML
     protected TableView tabla;
     @FXML
@@ -34,13 +35,15 @@ public class AsientoController {
     protected TextField descripcion;
     private Asiento asiento;
     private Connection connection;
-    private AsientoController controller;
     private AdminMainController adminparenteController;
     private MainController parenteController;
     private ObservableList<Anotacion> anotaciones = FXCollections.observableList(new ArrayList<>());
     private List<Cuenta> cuentas;
 
 
+    /**
+     * Abre la direccion web de mi github en el navegador
+     */
     public void link(){
         try {
             Runtime.getRuntime().exec("cmd.exe /c start iexplore https://github.com/Carlos-Juan-Gonzalez");
@@ -49,6 +52,9 @@ public class AsientoController {
         }
     }
 
+    /**
+     * settea el icono en el hyperlink
+     */
     public void setGitIcon(){
         ImageView imagen = new ImageView();
         imagen.setImage(new Image(GestionContableApp.class.getResource("icons/gitIcon.png").toString()));
@@ -56,6 +62,9 @@ public class AsientoController {
         link.setBorder(null);
     }
 
+    /**
+     * settea el contenido de la view de creacion y actualización de asientos
+     */
     public void setAsientoContent(){
         createTableColumns();
         cambiarAction();
@@ -65,8 +74,12 @@ public class AsientoController {
         tabla.setItems(anotaciones);
     }
 
+    /**
+     * Cambia el evento onAction del botton action
+     */
     public void cambiarAction(){
-        action.setText("Actualizar Asiento");
+        action.setText("Actualizar");
+        delete.setVisible(true);
         action.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent event){
@@ -75,6 +88,9 @@ public class AsientoController {
         });
     }
 
+    /**
+     * crea una nueva row añadiento un objeto Anotacion en el observable del tableView
+     */
     @FXML
     public void newRow(){
         Anotacion anotacion = new Anotacion();
@@ -89,6 +105,9 @@ public class AsientoController {
             }
         }
     }
+    /**
+     * borra una row borrando un objeto Anotacion en el observable del tableView
+     */
     @FXML
     public void deleteRow(){
         if (anotaciones.size() != 0){
@@ -96,6 +115,9 @@ public class AsientoController {
         }
     }
 
+    /**
+     * Llama a todos los metodos necesarios para la insercion de un asiento en la tabla asientos
+     */
     @FXML void crearAsiento(){
         if(isAllSet()){
             asiento.setDescripcion(descripcion.getText());
@@ -105,7 +127,11 @@ public class AsientoController {
                 for (Anotacion a : anotaciones){
                     a.insertAnotacion(connection,asiento.getId());
                 }
-                adminparenteController.setDiarioContent();
+                if(adminparenteController == null){
+                    parenteController.setDiarioContent();
+                }else {
+                    adminparenteController.setDiarioContent();
+                }
                 ((Stage)tabla.getScene().getWindow()).close();
             }else{
                 balancedAlert();
@@ -115,6 +141,9 @@ public class AsientoController {
         }
     }
 
+    /**
+     * Llama a todos los metodos necesarios para la actualizacion de un asiento
+     */
     @FXML
     public void actualizar(){
         if(isAllSet()){
@@ -132,7 +161,12 @@ public class AsientoController {
                     }else {
                         dbAnotaciones.get(i).deleteAnotacion(connection);
                     }
-                    adminparenteController.setDiarioContent();
+                    if(adminparenteController == null){
+                        parenteController.setDiarioContent();
+                    }else {
+                        adminparenteController.setDiarioContent();
+                    }
+
                     ((Stage)tabla.getScene().getWindow()).close();
                 }
             }else{
@@ -143,12 +177,34 @@ public class AsientoController {
         }
     }
 
+    /**
+     * LLama a todos los metodos del modelo para borrar un asiento en la base de datos
+     */
+    @FXML
+    public void borrarAsiento(){
+       if (deleteAlert()){
+           asiento.deleteAsiento(connection);
+           if(adminparenteController == null){
+               parenteController.setDiarioContent();
+           }else {
+               adminparenteController.setDiarioContent();
+           }
+           ((Stage)tabla.getScene().getWindow()).close();
+       }
+    }
+
+    /**
+     * LLama a todos los metodos del modelo para actualizar un asiento en la base de datos
+     */
     public void actualizarAsiento(){
     asiento.setFecha(fecha.getValue().toString());
     asiento.setDescripcion(descripcion.getText());
     asiento.updateAsiento(connection);
     }
 
+    /**
+     * Crea la columnas de la TableView asi como sus CellFactories y sus event OnEditEvent
+     */
     public void createTableColumns(){
         TableColumn debe = new TableColumn("Debe");
         debe.setCellValueFactory(new PropertyValueFactory<Anotacion,Integer>("debe"));
@@ -195,10 +251,18 @@ public class AsientoController {
         tabla.getColumns().addAll(debe,haber,cuenta,nombre);
     }
 
+    /**
+     * Crea mediante el Modelo de Anotacion un observable de anotaciones
+     */
     public void createObservable(){
         Anotacion anotacion = new Anotacion();
         this.anotaciones = FXCollections.observableList(anotacion.constructAnotaciones(connection,asiento.getId()));
     }
+
+    /**
+     * Crea mediante el Modelo de Cuenta un observable de codigos de cuenta
+     * @return ObservableList<Integer>: lista observale de codigos de cuenta
+     */
     public ObservableList<Integer> createObservableComboBox(){
         Cuenta cuenta = new Cuenta();
         List<Integer> nombres = new ArrayList<>();
@@ -209,10 +273,16 @@ public class AsientoController {
         return FXCollections.observableList(nombres);
     }
 
-    public void setAtributes(Connection connection, AsientoController controller,Asiento asiento,Object parenteController){
+    /**
+     * Settea los atributos de clases necesarios para mostrar correctamente la view
+     * y trabajar con ella
+     * @param connection Connection: conexion a la base de datos
+     * @param asiento Asiento: asiento a mostrar en la vista
+     * @param parenteController MainController: Controller de el Stage Parent
+     */
+    public void setAtributes(Connection connection,Asiento asiento,Object parenteController){
         this.asiento = asiento;
         this.connection = connection;
-        this.controller = controller;
         if (parenteController instanceof AdminMainController){
             this.adminparenteController = (AdminMainController) parenteController;
         }else {
@@ -220,6 +290,12 @@ public class AsientoController {
         }
     }
 
+    /**
+     * Busca y devuelve el nombre de cuenta asociado
+     * al codigo pasado por parametros
+     * @param codigo Int: codigo a buscar su nombre
+     * @return String: nombre de la cuenta
+     */
     public String getCuentaNombreByCodigo(int codigo){
         for (Cuenta c : cuentas){
             if (c.getCodigo() == codigo){
@@ -229,17 +305,25 @@ public class AsientoController {
         return "";
     }
 
+    /**
+     * Comprueba que todos los campos tengan contenido
+     * @return boolean: true si todo tiene contenido, false si faltan campos
+     */
     public boolean isAllSet(){
-        if (fecha.getValue().toString() == "" || descripcion.getText() == ""){
+        if (fecha.getValue() == null || descripcion.getText() == ""){
             return false;
         }
-        for (Anotacion anotacion : anotaciones){
-            if (anotacion.getCodigo_cuenta() == 0 ||(anotacion.getDebe() == 0 && anotacion.getHaber() == 0)){
-                return false;
-            }
+        if (anotaciones.size() == 0){
+            return false;
         }
+
         return true;
     }
+
+    /**
+     * instancia y muesta un alert.AlertType.Error para
+     * indicar que hay campos sin contenido en el asiente
+     */
     public void allSetAler(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Anotaciones Vacias");
@@ -248,6 +332,10 @@ public class AsientoController {
         alert.showAndWait();
     }
 
+    /**
+     * comprueba que los campos debe y haber esten cuadrados
+     * @return boolean: true si estan cuadrados, false si no
+     */
     public boolean isBalanced(){
         int debe = 0, haber = 0;
         for (Anotacion anotacion : anotaciones){
@@ -264,12 +352,44 @@ public class AsientoController {
         }
     }
 
+    /**
+     * instancia y muesta un alert.AlertType.Error para
+     * indicar un descuadre en el asiento
+     */
     public void balancedAlert(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Descuadre en el asiento");
         alert.setHeaderText(null);
         alert.setContentText("Las anotaciones del asiento estan descuadradas");
         alert.showAndWait();
+    }
+
+    /**
+     * instancia y muesta un alert.AlertType.Confirmation
+     * @return Boolean: true si el ButtonType devuelto es OK, false si es Type Cancel
+     */
+    public boolean deleteAlert(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación de Borrado");
+        alert.setHeaderText(null);
+        alert.setContentText("Estas seguro de que desea borrar este asiento");
+        Optional<ButtonType> eleccion = alert.showAndWait();
+        if (eleccion.get() == ButtonType.OK){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     * Desactiva los botones de funcionalidad los cuales un usuario invitado
+     * no deveria tener acceso
+     */
+    public void prepareInvitado(){
+        action.setVisible(false);
+        delete.setVisible(false);
+        nuevo.setVisible(false);
+        borrar.setVisible(false);
     }
 
 }

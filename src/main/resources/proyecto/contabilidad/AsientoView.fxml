@@ -23,11 +23,12 @@
                         </VBox>
                         <VBox>
                                 <HBox minHeight="37.5" minWidth="250" alignment="BOTTOM_CENTER" spacing="10">
-                                        <Button text="Crear Asiento" styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#crearAsiento" fx:id="action"/>
+                                        <Button text="Crear" styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#crearAsiento" fx:id="action"/>
+                                        <Button text="Borrar" visible="false" styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#borrarAsiento" fx:id="delete"/>
                                 </HBox>
                                 <HBox minHeight="37.5" minWidth="250" alignment="BOTTOM_CENTER" spacing="10">
-                                        <Button styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#newRow">Nueva Fila</Button>
-                                        <Button styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#deleteRow">Borrar Fila</Button>
+                                        <Button styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#newRow" fx:id="nuevo">Nueva Fila</Button>
+                                        <Button styleClass="btn, btn-primary" style="-fx-background-color: #5c67fa" onAction="#deleteRow" fx:id="borrar">Borrar Fila</Button>
                                 </HBox>
                         </VBox>
                 </HBox>

@@ -124,9 +124,25 @@ public class Conexion {
 
     public void createNewUser(String usuario, String password){
         try(Statement statement = conexion.createStatement()) {
-            statement.execute("use gestorcontabledb");
-            statement.execute("create user if not exists '"+usuario+"'@'localhost' IDENTIFIED by '"+password+"';");
-            statement.execute("grant all privileges on gestorContableDB.* to '"+usuario+"'@'localhost'");
+            if (!usuarioExists(usuario)){
+                statement.execute("use gestorcontabledb");
+                statement.execute("create user if not exists '"+usuario+"'@'localhost' IDENTIFIED by '"+password+"';");
+                statement.execute("grant all privileges on gestorContableDB.* to '"+usuario+"'@'localhost'");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean usuarioExists(String usuario){
+        try (Statement statement = conexion.createStatement()){
+            ResultSet rs = statement.executeQuery("select User from mysql.user where User = '"+usuario+"'");
+
+            if(rs.next()){
+                return true;
+            }else {
+                return false;
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

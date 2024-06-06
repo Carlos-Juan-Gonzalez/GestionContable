@@ -2,19 +2,14 @@ package proyecto.contabilidad;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
@@ -25,12 +20,17 @@ public class MainController {
     protected Hyperlink link;
     @FXML
     protected TableView tabla;
+    @FXML
+    protected Button nuevo;
     private Diario diario;
     private Usuario usuario;
     private Connection connection;
     private MainController controller;
 
 
+    /**
+     * Redirecciona a el enlaze de git hub en el navegado predetermidano
+     */
     public void link() {
         try {
             Runtime.getRuntime().exec("cmd.exe /c start iexplore https://github.com/Carlos-Juan-Gonzalez");
@@ -39,6 +39,9 @@ public class MainController {
         }
     }
 
+    /**
+     * settea la imagen de github a el HyperLink
+     */
     public void setGitIcon() {
         ImageView imagen = new ImageView();
         imagen.setImage(new Image(GestionContableApp.class.getResource("icons/gitIcon.png").toString()));
@@ -46,6 +49,9 @@ public class MainController {
         link.setBorder(null);
     }
 
+    /**
+     * añade mediante un observable el contenido de la tabla
+     */
     public void setDiarioContent() {
         tabla.getColumns().clear();
         createTableColumns();
@@ -61,6 +67,9 @@ public class MainController {
         tabla.setItems(createObservable());
     }
 
+    /**
+     * crea y añade las columnas de la TableView
+     */
     public void createTableColumns() {
         TableColumn numero = new TableColumn("Asiento");
         numero.setCellValueFactory(new PropertyValueFactory<Asiento, Integer>("numero"));
@@ -84,11 +93,23 @@ public class MainController {
         tabla.getColumns().addAll(numero, fecha, descripcion, balance);
     }
 
+    /**
+     * Crea mediante el Modelo Un observable de los asientos del diario activo
+     * @return ObservableList<Asiento>: lista observable de asientos
+     */
     public ObservableList<Asiento> createObservable() {
         Asiento asiento = new Asiento();
         return FXCollections.observableList(asiento.constructAsientos(connection, diario.getId()));
     }
 
+    /**
+     * Settea todos los atributos de clase necesarios
+     * para el correcto funcionamiento de la vista
+     * @param diario Diario: diario abierto
+     * @param usuario Usuario: usuario activo
+     * @param connection Connection: conexion a la base de datos
+     * @param controller MainController: controller de la vista
+     */
     public void setAtributes(Diario diario, Usuario usuario, Connection connection, MainController controller) {
         this.diario = diario;
         this.usuario = usuario;
@@ -96,6 +117,9 @@ public class MainController {
         this.controller = controller;
     }
 
+    /**
+     * Crea y muestra la vista asientoView
+     */
     public void cambiarAsientoView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AsientoView.fxml"));
         try {
@@ -103,19 +127,13 @@ public class MainController {
             scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
             AsientoController controller = fxmlLoader.getController();
             controller.setGitIcon();
-            controller.setAtributes(connection, controller, new Asiento(diario.getId(), createObservable().size() + 1), this.controller);
+            controller.setAtributes(connection, new Asiento(diario.getId(), createObservable().size() + 1), this.controller);
             controller.createTableColumns();
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("Gestor Contable");
             stage.getIcons().add(new Image(GestionContableApp.class.getResource("icons/gestorContableIcon.png").toString()));
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent event) {
-                    event.consume();
-                }
-            });
             stage.show();
 
         } catch (IOException e) {
@@ -123,6 +141,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Crea y muestra la vista asientoView en modo actualizar asiento
+     * @param asiento Asiento: asiento a actualizar
+     */
     public void cambiarAsientoViewActualizar(Asiento asiento) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AsientoView.fxml"));
         try {
@@ -130,24 +152,49 @@ public class MainController {
             scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
             AsientoController controller = fxmlLoader.getController();
             controller.setGitIcon();
-            controller.setAtributes(connection, controller, asiento, this.controller);
+            controller.setAtributes(connection, asiento, this.controller);
             controller.setAsientoContent();
+            if(usuario.getPermiso_id() == 3){
+                controller.prepareInvitado();
+            }
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("Gestor Contable");
             stage.getIcons().add(new Image(GestionContableApp.class.getResource("icons/gestorContableIcon.png").toString()));
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent event) {
-                    event.consume();
-                }
-            });
             stage.show();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Carga y muestra la vista LoginView
+     */
+    @FXML
+    public void cerrarSesion(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loginView.fxml"));
+        try {
+
+            Scene scene = new Scene(fxmlLoader.load(), 500, 350);
+            GestionContableController controller = fxmlLoader.getController();
+            controller.setGitIcon();
+            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+            Stage stage = (Stage) tabla.getScene().getWindow();
+            stage.setTitle("Gestion Contable");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.getIcons().add(new Image(GestionContableApp.class.getResource("icons/gestorContableIcon.png").toString()));
+            stage.show();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void prepareInvitado(){
+        nuevo.setVisible(false);
     }
 
     public Hyperlink getLink() {

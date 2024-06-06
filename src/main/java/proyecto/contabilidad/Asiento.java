@@ -59,6 +59,14 @@ public class Asiento {
             throw new RuntimeException(e);
         }
     }
+
+    public void deleteAsiento(Connection connection){
+        try (Statement statement = connection.createStatement()){
+            statement.executeUpdate("delete from asientos where id = "+id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void insertAsiento(Connection connection){
         try (Statement statement = connection.createStatement()){
              statement.executeUpdate("insert into asientos (diario_id,numero,fecha,descripcion) values " +
