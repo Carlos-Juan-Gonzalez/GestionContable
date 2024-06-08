@@ -80,6 +80,38 @@ public class Usuario {
         return usuario;
     }
 
+    public boolean usuarioExiste(Connection connection,String user,int diario_id){
+        try (Statement statement = connection.createStatement()){
+
+            ResultSet rs = statement.executeQuery("select * from usuarios where usuario = '"+user+"' and diario_id = "+diario_id);
+
+            if (rs.next()){
+                return true;
+            }else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public boolean contraseñaExiste(Connection connection,String contraseña){
+        try (Statement statement = connection.createStatement()){
+
+            ResultSet rs = statement.executeQuery("select * from usuarios where contraseña = '"+contraseña+"'");
+
+            if (rs.next()){
+                return true;
+            }else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
     public int getId() {
         return id;
     }

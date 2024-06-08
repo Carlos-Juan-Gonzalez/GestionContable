@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import java.io.IOException;
@@ -15,6 +16,8 @@ public class AdminMainController extends MainController {
 
     @FXML
     protected TextField codigo,nombre;
+    @FXML
+    protected Text alert;
     @FXML
     protected ComboBox permiso,diario_id,diarios;
     @FXML
@@ -82,13 +85,22 @@ public class AdminMainController extends MainController {
 
     /**
      * Llama a los metodos necesarios para hacer un insert a la tabla cuentas
+     * manda una alerta ante un fallo
      */
     @FXML
     public void crearCuenta(){
         if (validarCuenta()){
-            Cuenta cuenta = new Cuenta(Integer.parseInt(codigo.getText()),nombre.getText());
-            cuenta.insertCuenta(controller.getConnection(),controller.getDiario().getId());
-            ((Stage)nombre.getScene().getWindow()).close();
+            if (cuentaExists()){
+                alert.setVisible(true);
+                alert.setText("Codigo de cuenta ya existente");
+            }else {
+                Cuenta cuenta = new Cuenta(Integer.parseInt(codigo.getText()),nombre.getText());
+                cuenta.insertCuenta(controller.getConnection(),controller.getDiario().getId());
+                ((Stage)nombre.getScene().getWindow()).close();
+            }
+        }else {
+            alert.setVisible(true);
+            alert.setText("Hay campos sin contenidos o con formato erroneo");
         }
     }
 
@@ -99,7 +111,7 @@ public class AdminMainController extends MainController {
      * @return Boolean: true si todos los campos tienen contenido, false si no
      */
     public boolean validarCuenta(){
-        if (codigo.getText() == "" || nombre.getText() == ""){
+        if (codigo.getText().equals("") || nombre.getText().equals("")){
             return false;
         }else {
             try {
@@ -108,6 +120,25 @@ public class AdminMainController extends MainController {
                 return false;
             }
             return true;
+        }
+    }
+
+    /**
+     * Comprueba que si el codigo de cuenta ya existe
+     * @return booolean: true si existe, false si no
+     */
+    public boolean cuentaExists(){
+        Cuenta cuenta = new Cuenta();
+        try {
+            if (cuenta.cuentaExiste(controller.getConnection(),controller.getDiario().getId(),
+                    Integer.parseInt(codigo.getText()))){
+                return true;
+            }else {
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            return false;
         }
     }
 
@@ -153,12 +184,27 @@ public class AdminMainController extends MainController {
      */
     @FXML
     public void crearUsuario(){
-        if (validarUsuario()){
-            Usuario usuario = new Usuario(permisoIntoID(permiso.getValue().toString()),
-                    new Diario().getDiarioIDByName(controller.getConnection(),diario_id.getValue().toString())
-                    ,nombre.getText(),contraseña.getText());
-            usuario.insertUsuario(controller.getConnection());
-            ((Stage)nombre.getScene().getWindow()).close();
+
+        if (!validarUsuario()){
+            alert.setVisible(true);
+            alert.setText("Hay campos sin contenidos o con formato erroneo");
+        }else{
+            if (usuarioExiste()){
+                alert.setVisible(true);
+                alert.setText("Ya existe un usuario asociado a ese nombre");
+            }else {
+                if (contraseñaExiste()){
+                    alert.setVisible(true);
+                    alert.setText("La contraseña ya esta en uso");
+                }
+                else {
+                    Usuario usuario = new Usuario(permisoIntoID(permiso.getValue().toString()),
+                            new Diario().getDiarioIDByName(controller.getConnection(),diario_id.getValue().toString())
+                            ,nombre.getText(),contraseña.getText());
+                    usuario.insertUsuario(controller.getConnection());
+                    ((Stage)nombre.getScene().getWindow()).close();
+                }
+            }
         }
     }
 
@@ -168,10 +214,46 @@ public class AdminMainController extends MainController {
      * @return Boolean: true si todos los campos tienen contenido, false si no
      */
     public boolean validarUsuario(){
-        if (nombre.getText() == "" || contraseña.getText() == ""){
+        if (nombre.getText().equals("") || contraseña.getText().equals("")){
             return false;
         }else {
             return true;
+        }
+    }
+
+    /**
+     * Comprueba que si el codigo de cuenta ya existe
+     * @return booolean: true si existe, false si no
+     */
+    public boolean usuarioExiste(){
+        Usuario usuario = new Usuario();
+        try {
+            if (usuario.usuarioExiste(controller.getConnection(),nombre.getText(),controller.getDiario().getId())){
+                return true;
+            }else {
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    /**
+     * Comprueba que si el codigo de cuenta ya existe
+     * @return booolean: true si existe, false si no
+     */
+    public boolean contraseñaExiste(){
+        Usuario usuario = new Usuario();
+        try {
+            if (usuario.contraseñaExiste(controller.getConnection(),contraseña.getText())){
+                return true;
+            }else {
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            return false;
         }
     }
 

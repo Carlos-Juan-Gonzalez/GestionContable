@@ -7,7 +7,7 @@ import java.sql.*;
 public class Conexion {
     final private String url = "jdbc:mysql://localhost:3306/";
     final private String user = "root";
-    final private String password = "root";
+    final private String password = "";
     private Connection conexion;
 
 

@@ -63,6 +63,21 @@ public class Cuenta {
         return id;
     }
 
+    public boolean cuentaExiste(Connection connection, int diario_id,int codigo){
+        try (Statement statement = connection.createStatement()){
+
+            ResultSet rs = statement.executeQuery("select * from cuentas where diario_id="+diario_id+" and codigo = " +codigo);
+
+            if (rs.next()){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public String toString() {
         return String.valueOf(codigo);
