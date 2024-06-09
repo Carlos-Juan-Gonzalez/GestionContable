@@ -3,7 +3,11 @@ package proyecto.contabilidad;
 import java.io.*;
 import java.sql.*;
 
-
+/**
+ * Clase Modal que controla la conexion de la
+ * aplicacion con la base de datos
+ * @author Carlos Juan González
+ */
 public class Conexion {
     final private String url = "jdbc:mysql://localhost:3306/";
     final private String user = "root";

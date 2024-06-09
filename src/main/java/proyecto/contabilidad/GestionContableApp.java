@@ -9,6 +9,11 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
 
+
+/**
+ * Clase Main de la aplicación con los ajustes de inicio de javafx
+ * @author Carlos Juan González
+ */
 public class GestionContableApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {

@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.LocalDateStringConverter;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -22,6 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Clase controladora de la vista que gestiona la creacion
+ * y la edicion del asiento
+ * @author Carlos Juan González
+ */
 public class AsientoController {
     @FXML
     protected Hyperlink link;

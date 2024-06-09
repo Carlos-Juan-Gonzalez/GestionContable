@@ -12,4 +12,4 @@ insert into permisos (permiso) values ('usuario');
 insert into permisos (permiso) values ('invitado');
 insert into diarios (nombre) values ('prueba');
 insert into usuarios (permiso_id,diario_id,usuario,contraseña) values (1,1,'admin','');
-insert into usuarios (permiso_id,diario_id,usuario,contraseña) values (3,1,'invitado','123')
+insert into usuarios (permiso_id,diario_id,usuario,contraseña) values (3,1,'invitado','111')

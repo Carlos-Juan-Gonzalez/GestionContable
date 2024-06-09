@@ -6,6 +6,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase Modal de la tabla anotaciones
+ * @author Carlos Juan González
+ */
 public class Cuenta {
     private int id;
     private int codigo;
@@ -25,6 +29,13 @@ public class Cuenta {
         this.nombre = nombre;
     }
 
+    /**
+     * Crea mediante peticion a la base de datos una lista de cuentas
+     * que coincidan con el id pasado por parametros
+     * @param connection Connection: conexion con la base de datos
+     * @param id int: id del diario a filtrar
+     * @return
+     */
     public List<Cuenta> constructCuentas(Connection connection, int id){
         List<Cuenta> cuentas = new ArrayList<Cuenta>();
         try (Statement statement = connection.createStatement()){
@@ -40,6 +51,10 @@ public class Cuenta {
         return cuentas;
     }
 
+    /**
+     * Ejecuta un insert en la tabla asientos
+     * @param connection Connection: conexion con la base de datos
+     */
     public void insertCuenta(Connection connection, int id){
         try (Statement statement = connection.createStatement()){
 
@@ -48,6 +63,13 @@ public class Cuenta {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Busca en la base de datos el id asociado a el codigo de cuenta pasado por parametros
+     * @param connection Connection: conexion con la base de datos
+     * @param codigo int: codigo de cuenta
+     * @return
+     */
     public int getCuentaID(Connection connection, int codigo){
         int id = 0;
         try (Statement statement = connection.createStatement()){
@@ -63,6 +85,14 @@ public class Cuenta {
         return id;
     }
 
+    /**
+     * Comprueba la existencia de un registro en la base de datos que coincida
+     * con los atributos pasados por parametros
+     * @param connection Connection: conexion con la base de datos
+     * @param diario_id int: id del diario asociado a la cuenta
+     * @param codigo int: codigo de la cuenta
+     * @return boolean: true si existe, false si no
+     */
     public boolean cuentaExiste(Connection connection, int diario_id,int codigo){
         try (Statement statement = connection.createStatement()){
 

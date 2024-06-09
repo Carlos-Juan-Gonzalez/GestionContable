@@ -5,6 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Clase Modal de la tabla Usuario
+ * @author Carlos Juan González
+ */
 public class Usuario {
 
     private int id;
@@ -31,6 +35,11 @@ public class Usuario {
     }
 
 
+    /**
+     * Cambia la contraseña inicial del administrador de la aplicacion
+     * @param connection Connection: conexion con la base de datos
+     * @param contraseña String: contraseña del usuario admin
+     */
     public void cambiarContraseñaAdmin(Connection connection,String contraseña){
 
         try(Statement statement = connection.createStatement()){
@@ -41,6 +50,14 @@ public class Usuario {
         }
     }
 
+    /**
+     * Comprueba que los datos pasados por parametros coinciden con los
+     * guardados en la base de datos
+     * @param conexion Connection: conexion con la base de datos
+     * @param usuario String: nombre de usuario a comprobar
+     * @param password String: contraseña a comprobar
+     * @return boolean: true si los datos coincicen, false si no
+     */
     public boolean validarLogin(Connection conexion,String usuario,String password){
         try(Statement statement = conexion.createStatement()){
             statement.execute("use gestorcontabledb;");
@@ -56,8 +73,12 @@ public class Usuario {
         return false;
     }
 
-    public void insertUsuario(Connection conexion){
-        try(Statement statement = conexion.createStatement()){
+    /**
+     * Ejecuta un insert en la tabla usuarios
+     * @param connection Connection: conexion con la base de datos
+     */
+    public void insertUsuario(Connection connection){
+        try(Statement statement = connection.createStatement()){
             statement.executeUpdate("insert into usuarios (permiso_id,diario_id,usuario,contraseña) values " +
                     "("+permiso_id+","+diario_id+",'"+nombre+"','"+contraseña+"')");
         }catch (SQLException e){
@@ -65,6 +86,12 @@ public class Usuario {
         }
     }
 
+    /**
+     * Crea mediante peticion a la base de datos una instancia de Usuario
+     * @param connection Connection: conexion con la base de datos
+     * @param user String: nombre de usuario a instanciar
+     * @return Usuario: instancia de Usuario creada
+     */
     public Usuario constructUsuario(Connection connection,String user){
         Usuario usuario;
         try (Statement statement = connection.createStatement()){
@@ -80,6 +107,14 @@ public class Usuario {
         return usuario;
     }
 
+    /**
+     * Comprueba la existencia de un registro en la base de datos que
+     * coincida con los valores pasados por parametros
+     * @param connection Connection: conexion con la base de datos
+     * @param user String: nombre del usuario
+     * @param diario_id int: id de diario
+     * @return boolean: true si existe, false si no
+     */
     public boolean usuarioExiste(Connection connection,String user,int diario_id){
         try (Statement statement = connection.createStatement()){
 
@@ -96,6 +131,13 @@ public class Usuario {
         }
     }
 
+    /**
+     * Comprueba la existencia de un registro con la contraseña igual
+     * a la pasada por parametros
+     * @param connection Connection: conexion con la base de datos
+     * @param contraseña String: contraseña del usuario a comprobar
+     * @return boolean: true si existe, false si no
+     */
     public boolean contraseñaExiste(Connection connection,String contraseña){
         try (Statement statement = connection.createStatement()){
 

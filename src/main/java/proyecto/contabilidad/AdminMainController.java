@@ -5,13 +5,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import java.io.IOException;
 import java.util.List;
 
-
+/**
+ * Clase controladora de la version de admininistrador
+ * de la vista diario principal
+ * @author Carlos Juan González
+ */
 public class AdminMainController extends MainController {
 
     @FXML
@@ -75,6 +80,7 @@ public class AdminMainController extends MainController {
             scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
             Stage stage = new Stage();
             stage.setTitle("Gestor Contable");
+            stage.getIcons().add(new Image(GestionContableApp.class.getResource("icons/gestorContableIcon.png").toString()));
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -151,8 +157,12 @@ public class AdminMainController extends MainController {
             Diario diario = new Diario(nombre.getText());
             diario.insertDiario(controller.getConnection());
             ((Stage)nombre.getScene().getWindow()).close();
+        }else {
+            alert.setVisible(true);
+            alert.setText("El campo debe tener contenido.");
         }
     }
+
 
     /**
      * cambia el atributo Diario
@@ -172,7 +182,7 @@ public class AdminMainController extends MainController {
      * @return Boolean: true si todos los campos tienen contenido, false si no
      */
     public boolean validarDiario(){
-        if (nombre.getText() == ""){
+        if (nombre.getText().equals("")){
             return false;
         }else {
             return true;

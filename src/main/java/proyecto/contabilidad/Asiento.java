@@ -6,6 +6,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase Modal de la tabla anotaciones
+ * @author Carlos Juan González
+ */
 public class Asiento {
 
     private int id;
@@ -38,6 +42,13 @@ public class Asiento {
         this.descripcion = descripcion;
     }
 
+    /**
+     * Crea mediante peticion a la base de datos una lista de asientos
+     * que coincidan con el id pasado por parametros
+     * @param connection Connection: conexion con la base de datos
+     * @param id int: id del diario a filtrar
+     * @return List<Asiento>: lista de asientos
+     */
     public List<Asiento> constructAsientos(Connection connection,int id){
         List<Asiento> asientos = new ArrayList<Asiento>();
         try (Statement statement = connection.createStatement()){
@@ -52,6 +63,12 @@ public class Asiento {
         }
         return asientos;
     }
+
+    /**
+     * Ejecuta un update en la tabla asientos cambiando los campos
+     * fecha y descripcion
+     * @param connection Connection: conexion con la base de datos
+     */
     public void updateAsiento(Connection connection){
         try (Statement statement = connection.createStatement()){
             statement.executeUpdate("update asientos set fecha = '"+fecha+"', descripcion = '"+descripcion+"' where id = "+id);
@@ -60,6 +77,10 @@ public class Asiento {
         }
     }
 
+    /**
+     * Ejecuta un delete en la tabla asientos
+     * @param connection Connection: conexion con la base de datos
+     */
     public void deleteAsiento(Connection connection){
         try (Statement statement = connection.createStatement()){
             statement.executeUpdate("delete from asientos where id = "+id);
@@ -67,6 +88,11 @@ public class Asiento {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Ejecuta un insert en la tabla asientos
+     * @param connection Connection: conexion con la base de datos
+     */
     public void insertAsiento(Connection connection){
         try (Statement statement = connection.createStatement()){
              statement.executeUpdate("insert into asientos (diario_id,numero,fecha,descripcion) values " +
@@ -81,6 +107,12 @@ public class Asiento {
         }
     }
 
+    /**
+     * Calcula el balance del asiento con id pasado por parametros
+     * @param connection Connection: conexion con la base de datos
+     * @param id int: id a buscar
+     * @return int: balance de la cuenta
+     */
     public int getBalanceAsiento(Connection connection,int id){
         int balance = 0;
         try (Statement statement = connection.createStatement()){

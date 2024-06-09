@@ -16,6 +16,10 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import java.io.IOException;
 import java.sql.Connection;
 
+/**
+ * Clase controladora de la vista login de la aplicacion
+ * @author Carlos Juan González
+ */
 public class GestionContableController{
 
     @FXML

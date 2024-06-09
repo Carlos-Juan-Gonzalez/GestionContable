@@ -15,6 +15,11 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import java.io.IOException;
 import java.sql.Connection;
 
+/**
+ * Clase controladora de la version de usuario y invitado
+ * de la vista diario principal
+ * @author Carlos Juan González
+ */
 public class MainController {
     @FXML
     protected Hyperlink link;

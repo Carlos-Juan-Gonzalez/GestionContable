@@ -7,6 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase Modal de la tabla anotaciones
+ * @author Carlos Juan González
+ */
 public class Anotacion {
     private int id;
     private int cuenta_id;
@@ -50,6 +54,13 @@ public class Anotacion {
                 '}';
     }
 
+    /**
+     * Crea mediante peticion a la base de datos una lista de anotaciones
+     * que coincidan con el id pasado por parametros
+     * @param connection Connection: conexion con la base de datos
+     * @param id int: id del asiento a filtrar
+     * @return
+     */
     public List<Anotacion> constructAnotaciones(Connection connection, int id){
         List<Anotacion> anotaciones = new ArrayList<Anotacion>();
         try (Statement statement = connection.createStatement()){
@@ -67,6 +78,12 @@ public class Anotacion {
         }
         return anotaciones;
     }
+
+    /**
+     * Ejecuta un update en la tabla anotaciones cambiando los campos
+     * cuenta_id,debe y haber
+     * @param connection Connection: conexion con la base de datos
+     */
     public void updateAnotacion(Connection connection){
         try (Statement statement = connection.createStatement()){
             statement.executeUpdate("update anotaciones set cuenta_id = "+cuenta_id+", debe = "+debe+", haber = "+haber+ " where id = " +id);
@@ -74,14 +91,25 @@ public class Anotacion {
             System.out.println(e);
         }
     }
-    public void insertAnotacion(Connection connection,int asiento){
+
+    /**
+     * Ejecuta un insert en la tabla anotaciones
+     * @param connection Connection: conexion con la base de datos
+     * @param id int: id de asiento
+     */
+    public void insertAnotacion(Connection connection,int id){
         try (Statement statement = connection.createStatement()){
             statement.execute("insert into anotaciones (cuenta_id,asiento_id,orden,debe,haber) values " +
-                    "("+cuenta_id+","+asiento+","+orden+","+debe+","+haber+")");
+                    "("+cuenta_id+","+id+","+orden+","+debe+","+haber+")");
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
+
+    /**
+     * Ejecuta un delete en la tabla anotaciones
+     * @param connection Connection: conexion con la base de datos
+     */
     public void deleteAnotacion(Connection connection){
         try (Statement statement = connection.createStatement()){
             statement.executeUpdate("delete from anotaciones where orden = " + orden);
@@ -90,6 +118,11 @@ public class Anotacion {
         }
     }
 
+    /**
+     * Comprueba la existencia de un registro en la base de datos
+     * @param connection Connection: conexion con la base de datos
+     * @return boolean: true si existe, false si no
+     */
     public boolean exists(Connection connection){
         try (Statement statement = connection.createStatement()){
             ResultSet rs = statement.executeQuery("select * from cuentas where id = "+ id);
